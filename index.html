@@ -1,0 +1,613 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="IndianHacker — ethical hacking, cybersecurity education, bug bounty research and authorized security testing.">
+  <meta name="theme-color" content="#070a08">
+  <title>IndianHacker | Cybersecurity & Bug Bounty</title>
+
+  <style>
+    :root {
+      --green: #39ff88;
+      --bg: #070a08;
+      --panel: #0d130f;
+      --muted: #a0ada4;
+      --border: #203527;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 25px;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: #f0fff4;
+      font-family: Consolas, "Courier New", monospace;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 22px 8%;
+      border-bottom: 1px solid #1b3323;
+      gap: 20px;
+      flex-wrap: wrap;
+      background: rgba(7, 10, 8, 0.96);
+    }
+
+    .logo {
+      color: var(--green);
+      font-size: 22px;
+      font-weight: bold;
+    }
+
+    nav {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    nav a {
+      color: var(--muted);
+      font-size: 12px;
+      transition: color 0.2s;
+    }
+
+    nav a:hover,
+    nav a:focus-visible {
+      color: var(--green);
+    }
+
+    .hero {
+      max-width: 1100px;
+      margin: auto;
+      padding: 100px 24px 75px;
+      text-align: center;
+    }
+
+    .tag {
+      color: var(--green);
+      font-size: 12px;
+      letter-spacing: 3px;
+      line-height: 1.8;
+    }
+
+    h1 {
+      font-size: clamp(38px, 8vw, 76px);
+      margin: 24px 0;
+      line-height: 1.12;
+    }
+
+    h1 span,
+    .section-title span {
+      color: var(--green);
+    }
+
+    .intro {
+      max-width: 680px;
+      margin: 0 auto;
+      color: var(--muted);
+      line-height: 1.9;
+      font-family: Arial, sans-serif;
+    }
+
+    .actions {
+      margin-top: 32px;
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 13px 18px;
+      border: 1px solid var(--green);
+      color: var(--green);
+      font: inherit;
+      font-size: 12px;
+      line-height: 1.5;
+      transition: background 0.2s, color 0.2s;
+      overflow-wrap: anywhere;
+    }
+
+    .btn:hover,
+    .btn:focus-visible {
+      background: var(--green);
+      color: #061008;
+    }
+
+    .btn.primary {
+      background: var(--green);
+      color: #061008;
+      font-weight: bold;
+    }
+
+    .btn.primary:hover {
+      background: transparent;
+      color: var(--green);
+    }
+
+    .terminal {
+      max-width: 680px;
+      margin: 45px auto 0;
+      text-align: left;
+      background: var(--panel);
+      border: 1px solid #254630;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 0 35px rgba(57, 255, 136, 0.04);
+    }
+
+    .terminal-top {
+      padding: 12px 16px;
+      color: var(--muted);
+      border-bottom: 1px solid #254630;
+      font-size: 12px;
+    }
+
+    .terminal-body {
+      padding: 20px;
+      line-height: 2;
+      font-size: 13px;
+      overflow-wrap: anywhere;
+    }
+
+    .green {
+      color: var(--green);
+    }
+
+    .muted {
+      color: var(--muted);
+    }
+
+    section {
+      max-width: 1100px;
+      padding: 60px 24px;
+      margin: auto;
+    }
+
+    .section-title {
+      font-size: clamp(25px, 4vw, 34px);
+      margin-top: 20px;
+      line-height: 1.3;
+    }
+
+    .section-description {
+      max-width: 700px;
+      color: var(--muted);
+      font: 15px/1.9 Arial, sans-serif;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 18px;
+      margin-top: 28px;
+    }
+
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      padding: 25px;
+      border-radius: 7px;
+      min-width: 0;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .card:hover {
+      border-color: var(--green);
+      transform: translateY(-3px);
+    }
+
+    .card .symbol {
+      font-size: 28px;
+    }
+
+    .card h3 {
+      color: var(--green);
+      font-size: 17px;
+      line-height: 1.5;
+    }
+
+    .card p {
+      color: var(--muted);
+      font: 14px/1.9 Arial, sans-serif;
+      overflow-wrap: anywhere;
+    }
+
+    .card .btn {
+      margin-top: 8px;
+    }
+
+    .card a:not(.btn) {
+      overflow-wrap: anywhere;
+    }
+
+    .notice {
+      border-left: 3px solid var(--green);
+      padding: 16px 18px;
+      background: #0b160e;
+      color: var(--muted);
+      font: 13px/1.9 Arial, sans-serif;
+      margin-top: 25px;
+    }
+
+    .contact-details {
+      color: var(--green);
+      font-size: 13px;
+      overflow-wrap: anywhere;
+    }
+
+    footer {
+      text-align: center;
+      border-top: 1px solid var(--border);
+      padding: 30px 20px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 2;
+    }
+
+    footer a {
+      color: var(--green);
+    }
+
+    @media (max-width: 600px) {
+      header {
+        padding: 20px;
+      }
+
+      nav {
+        gap: 14px;
+      }
+
+      .hero {
+        padding-top: 65px;
+      }
+
+      section {
+        padding: 45px 20px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- NAVIGATION -->
+  <header>
+    <a class="logo" href="#home">IndianHacker<span>.</span></a>
+
+    <nav aria-label="Main navigation">
+      <a href="#home">HOME</a>
+      <a href="#learn">LEARN</a>
+      <a href="#research">RESEARCH</a>
+      <a href="#hire">HIRE ME</a>
+      <a href="#about">ABOUT</a>
+      <a href="#contact">CONTACT</a>
+    </nav>
+  </header>
+
+  <main>
+    <!-- HOME -->
+    <div class="hero" id="home">
+      <div class="tag">[ CYBERSECURITY / KNOWLEDGE / DEFENSE ]</div>
+
+      <h1>
+        Think like a hacker.<br>
+        <span>Defend like a pro.</span>
+      </h1>
+
+      <p class="intro">
+        Welcome to IndianHacker — a cybersecurity learning and
+        research project focused on ethical hacking, bug bounty
+        techniques, web security and responsible vulnerability research.
+      </p>
+
+      <div class="actions">
+        <a class="btn primary" href="#learn">
+          EXPLORE LEARNING →
+        </a>
+
+        <a class="btn" href="#hire">
+          HIRE ME FOR SECURITY TESTING
+        </a>
+      </div>
+
+      <div class="terminal">
+        <div class="terminal-top">
+          ● ● ● &nbsp; indianhacker — terminal
+        </div>
+
+        <div class="terminal-body">
+          <div>
+            <span class="green">visitor@indianhacker</span>:~$ whoami
+          </div>
+          <div class="muted">Cybersecurity researcher in development</div>
+
+          <div>
+            <span class="green">visitor@indianhacker</span>:~$ cat mission.txt
+          </div>
+          <div>Learn. Test responsibly. Secure systems.</div>
+
+          <div>
+            <span class="green">visitor@indianhacker</span>:~$
+            <span class="green">_</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- LEARNING -->
+    <section id="learn">
+      <div class="tag">01 / KNOWLEDGE BASE</div>
+
+      <h2 class="section-title">
+        Explore <span>Cybersecurity</span>
+      </h2>
+
+      <p class="section-description">
+        Build your understanding of security fundamentals and
+        develop practical skills in authorized environments.
+      </p>
+
+      <div class="grid">
+        <article class="card">
+          <div class="symbol">⌘</div>
+          <h3>Linux &amp; Networking</h3>
+          <p>
+            Learn Linux commands, IP addresses, DNS, ports,
+            networking and system fundamentals.
+          </p>
+        </article>
+
+        <article class="card">
+          <div class="symbol">⌕</div>
+          <h3>Web Application Security</h3>
+          <p>
+            Study common web vulnerabilities and practice
+            safely in authorized labs.
+          </p>
+        </article>
+
+        <article class="card">
+          <div class="symbol">⚙</div>
+          <h3>Security Tools</h3>
+          <p>
+            Explore tools such as Nmap and Burp Suite using
+            systems you own or have permission to test.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <!-- RESEARCH -->
+    <section id="research">
+      <div class="tag">02 / SECURITY RESEARCH</div>
+
+      <h2 class="section-title">
+        Research &amp; <span>Write-ups</span>
+      </h2>
+
+      <p class="section-description">
+        This is where I will share technical notes, cybersecurity
+        learning, bug bounty lessons and responsible disclosure
+        experiences as my research portfolio develops.
+      </p>
+
+      <div class="grid">
+        <article class="card">
+          <div class="symbol">01</div>
+          <h3>Web Security Research</h3>
+          <p>
+            Learn how web vulnerabilities work through controlled
+            testing and safe demonstrations.
+          </p>
+        </article>
+
+        <article class="card">
+          <div class="symbol">02</div>
+          <h3>Bug Bounty Learning</h3>
+          <p>
+            Document methodology, findings and lessons learned
+            from authorized security programs.
+          </p>
+        </article>
+      </div>
+
+      <div class="notice">
+        Research must respect the rules and scope of each program.
+        Never publish credentials, private data or information
+        that could put real users at risk.
+      </div>
+    </section>
+
+    <!-- HIRE ME -->
+    <section id="hire">
+      <div class="tag">03 / WORK WITH ME</div>
+
+      <h2 class="section-title">
+        Hire Me for <span>Bug Bounty &amp; Security Testing</span>
+      </h2>
+
+      <p class="section-description">
+        Need help with an authorized security testing project?
+        Contact me to discuss your requirements, testing scope
+        and objectives before work begins.
+      </p>
+
+      <div class="grid">
+        <article class="card">
+          <div class="symbol">⌕</div>
+          <h3>Web Security Testing</h3>
+          <p>
+            Discuss website security assessments, vulnerability
+            checks and web application testing on systems
+            you own or are authorized to assess.
+          </p>
+        </article>
+
+        <article class="card">
+          <div class="symbol">⌘</div>
+          <h3>Bug Bounty Research</h3>
+          <p>
+            Interested in collaborating on an eligible bug bounty
+            project? Contact me to discuss the program rules,
+            scope and responsible testing approach.
+          </p>
+        </article>
+
+        <article class="card">
+          <div class="symbol">⚙</div>
+          <h3>Security Consultation</h3>
+          <p>
+            Discuss security learning, basic security reviews
+            and practical recommendations appropriate to
+            your project's needs.
+          </p>
+        </article>
+      </div>
+
+      <div class="actions">
+        <a
+          class="btn primary"
+          href="mailto:indianhacker7096@gmail.com?subject=Security%20Testing%20Project%20Inquiry"
+        >
+          DISCUSS A PROJECT →
+        </a>
+
+        <a
+          class="btn"
+          href="https://t.me/Poxy041"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          CONTACT ON TELEGRAM
+        </a>
+      </div>
+
+      <div class="notice">
+        All engagements require appropriate authorization and
+        clearly agreed testing boundaries. Availability, experience,
+        pricing and deliverables will be discussed before accepting
+        any project. No testing is performed without permission.
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about">
+      <div class="tag">04 / ABOUT THIS PROJECT</div>
+
+      <h2 class="section-title">
+        Built for <span>Learning</span>
+      </h2>
+
+      <p class="section-description">
+        IndianHacker is an independent cybersecurity education
+        project focused on responsible research, practical learning
+        and improving digital security.
+      </p>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+      <div class="tag">05 / GET IN TOUCH</div>
+
+      <h2 class="section-title">
+        Contact <span>Me</span>
+      </h2>
+
+      <p class="section-description">
+        Have a question, project idea or collaboration opportunity?
+        Reach out by email or Telegram to start a conversation.
+      </p>
+
+      <div class="grid">
+        <article class="card">
+          <div class="symbol" aria-hidden="true">✉</div>
+          <h3>Email Me</h3>
+
+          <p>
+            For project inquiries, professional discussions
+            and collaboration opportunities.
+          </p>
+
+          <a
+            class="btn"
+            href="mailto:indianhacker7096@gmail.com"
+          >
+            SEND AN EMAIL →
+          </a>
+
+          <p class="contact-details">
+            indianhacker7096@gmail.com
+          </p>
+        </article>
+
+        <article class="card">
+          <div class="symbol" aria-hidden="true">➤</div>
+          <h3>Telegram</h3>
+
+          <p>
+            Contact me directly to discuss a project or
+            ask a cybersecurity-related question.
+          </p>
+
+          <a
+            class="btn"
+            href="https://t.me/Poxy041"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            MESSAGE ME →
+          </a>
+
+          <p class="contact-details">@Poxy041</p>
+        </article>
+      </div>
+
+      <div class="notice">
+        Please contact me responsibly. Do not send passwords,
+        private user information or other sensitive data through
+        public channels.
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <span class="green">IndianHacker.bond</span><br>
+    Learn responsibly. Help make the internet safer.<br>
+    <a href="#contact">Contact Me</a>
+    &nbsp; | &nbsp;
+    <a href="#hire">Hire Me</a>
+    <br>
+    © 2026 IndianHacker. All rights reserved.
+  </footer>
+</body>
+</html>
